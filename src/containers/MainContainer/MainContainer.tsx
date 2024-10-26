@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PostItem from '../../components/PostItem/PostItem.tsx';
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import Spinner from '../../UI/Spinner/Spinner.tsx';
 
 
@@ -29,9 +29,6 @@ const MainContainer: React.FC = () => {
   return (
     <div className="container mt-5">
       <h1>My Blog</h1>
-      <Link to="/new-post">
-        <button className="mb-3">Add New Post</button>
-      </Link>
 
       {loading ? (
         <Spinner />
