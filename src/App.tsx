@@ -7,12 +7,13 @@ import EditPostForm from './components/EditPostForm/EditPostForm.tsx';
 
 const App: React.FC = () => {
   return (
-      <Routes>
-        <Route path="/" element={<MainContainer />} />
-        <Route path="/posts/:id" element={<PostDetails />} />
-        <Route path="/new-post" element={<AddPostForm />} />
-        <Route path="/posts/:id/edit" element={<EditPostForm />} />
-      </Routes>
+    <Routes>
+      <Route path="/" element={<MainContainer />}>
+        <Route path="posts/:id" element={<PostDetails />} />
+        <Route path="posts/:id/edit" element={<EditPostForm />} />
+      </Route>
+      <Route path="/new-post" element={<AddPostForm />} />
+    </Routes>
   );
 };
 

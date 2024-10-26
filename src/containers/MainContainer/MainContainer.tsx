@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PostItem from '../../components/PostItem/PostItem.tsx';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
+import Spinner from '../../UI/Spinner/Spinner.tsx';
 
 
 const posts = [
@@ -19,21 +20,40 @@ const posts = [
 ];
 
 const MainContainer: React.FC = () => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 1000);
+  }, []);
+
   return (
     <div className="container mt-5">
       <h1>My Blog</h1>
       <Link to="/new-post">
-        <button>Add New Post</button>
+        <button className="mb-3">Add New Post</button>
       </Link>
-      {posts.map((post) => (
-        <PostItem
-          key={post.id}
-          id={post.id}
-          title={post.title}
-          date={post.date}
-          summary={post.summary}
-        />
-      ))}
+
+      {loading ? (
+        <Spinner />
+      ) : (
+        <div className="main-content">
+          <div className="posts-list">
+            {posts.map((post) => (
+              <PostItem
+                key={post.id}
+                id={post.id}
+                title={post.title}
+                date={post.date}
+                summary={post.summary}
+              />
+            ))}
+          </div>
+
+          <div className="post-details w-50">
+            <Outlet/>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
