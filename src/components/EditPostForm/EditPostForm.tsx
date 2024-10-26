@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-const postData = {
+interface Post {
+  title: string;
+  date: string;
+  content: string;
+}
+
+const postData:Record<number, Post> = {
   1: {
     title: 'Something incredible happened just now...',
     date: '22.02.2018 15:10',
@@ -38,27 +44,42 @@ const EditPostForm: React.FC = () => {
   }
 
   return (
-    <div className="edit-post-form">
-      <h2>Edit Post</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-        />
-        <textarea
-          placeholder="Content"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-        />
-        <button type="submit">Save Changes</button>
+    <div className="container mt-5">
+      <h2 className="text-center mb-4">Edit Post</h2>
+      <form onSubmit={handleSubmit} className="p-4 border rounded bg-light">
+        <div className="mb-3">
+          <label className="form-label">Title</label>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Date</label>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+          />
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Content</label>
+          <textarea
+            className="form-control"
+            placeholder="Content"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            rows={5}
+          />
+        </div>
+        <button type="submit" className="btn btn-primary w-100">
+          Save Changes
+        </button>
       </form>
     </div>
   );

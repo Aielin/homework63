@@ -1,7 +1,13 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-const postData = {
+interface Post {
+  title: string;
+  date: string;
+  content: string;
+}
+
+const postData: Record<number, Post> = {
   1: {
     title: 'Something incredible happened just now...',
     date: '22.02.2018 15:10',
@@ -24,19 +30,27 @@ const PostDetails: React.FC = () => {
     return <p>Post not found.</p>;
   }
 
+  const handleEdit = () => navigate(`/posts/${id}/edit`);
   const handleDelete = () => {
-    console.log(`Post with ID ${postId} deleted`);
     navigate('/');
   };
 
   return (
-    <div className="post-details">
+    <div className="container mt-5">
       <h2>{post.title}</h2>
       <p>{post.date}</p>
       <p>{post.content}</p>
-      <button onClick={() => navigate(`/posts/${id}/edit`)}>Edit</button>
-      <button onClick={handleDelete}>Delete</button>
-      <button onClick={() => navigate('/')}>Back to Home</button>
+      <div className="mt-4">
+        <button className="btn btn-warning me-2" onClick={handleEdit}>
+          Edit
+        </button>
+        <button className="btn btn-danger me-2" onClick={handleDelete}>
+          Delete
+        </button>
+        <button className="btn btn-secondary" onClick={() => navigate('/')}>
+          Back to Home
+        </button>
+      </div>
     </div>
   );
 };

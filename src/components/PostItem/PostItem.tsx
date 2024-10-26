@@ -16,11 +16,15 @@ const PostItem: React.FC<PostItemProps> = ({ id, title, date, summary }) => {
   };
 
   return (
-    <div className="post-item">
-      <h2>{title}</h2>
-      <p>{date}</p>
-      <p>{summary}</p>
-      <button onClick={handleReadMore}>Read more &gt;&gt; </button>
+    <div className="post-item card mb-3">
+      <div className="card-body">
+        <h5 className="card-title">{title}</h5>
+        <p className="card-text text-muted">{date}</p>
+        <p className="card-text">{summary}</p>
+        <button className="btn btn-warning" onClick={handleReadMore}>
+          Read more &gt;&gt;
+        </button>
+      </div>
     </div>
   );
 };

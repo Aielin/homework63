@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import PostItem from '../../components/PostItem/PostItem.tsx';
-import { Outlet } from 'react-router-dom';
 import Spinner from '../../UI/Spinner/Spinner.tsx';
+import './MainContainer.css';
 
 
-const posts = [
+interface Post {
+  id: number;
+  title: string;
+  date: string;
+  summary: string;
+}
+
+const posts: Post[] = [
   {
     id: 1,
     title: 'Something incredible happened just now...',
@@ -28,27 +35,23 @@ const MainContainer: React.FC = () => {
 
   return (
     <div className="container mt-5">
-      <h1>My Blog</h1>
+      <h1 className="text-center text-warning mb-4">My Blog</h1>
 
       {loading ? (
-        <Spinner />
+        <div className="post-list">
+          <Spinner/>
+        </div>
       ) : (
-        <div className="main-content">
-          <div className="posts-list">
-            {posts.map((post) => (
-              <PostItem
-                key={post.id}
-                id={post.id}
-                title={post.title}
-                date={post.date}
-                summary={post.summary}
-              />
-            ))}
-          </div>
-
-          <div className="post-details w-50">
-            <Outlet/>
-          </div>
+        <div className="posts-list">
+          {posts.map((post) => (
+            <PostItem
+              key={post.id}
+              id={post.id}
+              title={post.title}
+              date={post.date}
+              summary={post.summary}
+            />
+          ))}
         </div>
       )}
     </div>
